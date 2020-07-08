@@ -6,4 +6,4 @@
 - 4 terpasang log error monitoring sentry/cloudwatch
 - 5 template docker-compose local/laptop , staging , production
 
-## Will be updated future (>,<)
+## Will be updated on future (>,<)
