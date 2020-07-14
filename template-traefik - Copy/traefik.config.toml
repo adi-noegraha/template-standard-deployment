@@ -1,0 +1,55 @@
+[http]
+  [http.routers]
+  #########################################################################
+    # http #
+    [http.routers.http-to-app]
+      # You can change the rules here and make it more complex. Check traefik
+      # docs!
+      rule = "Host(`dashboard.labcovid.digitalservice.id`)"
+      service = "app"
+      entrypoints = ["http"]
+      # enable if u want redirect to https 
+      middlewares = ["redirect"]
+
+  ## https #
+    [http.routers.https-to-app]
+      rule = "Host(`dashboard.labcovid.digitalservice.id`)"
+      service = "app"
+      entrypoints = ["https"]
+      middlewares = ["app-compress","httpsHeader"]
+      [http.routers.https-to-app.tls]
+
+    [http.services]
+    # service 
+      [http.services.app]
+        [http.services.app.loadBalancer]
+        passHostHeader = true
+          [[http.services.app.loadBalancer.servers]]
+            # This is where your dev app lives.
+            url = "http://nginx/"
+
+
+  ########################################################################
+
+  [http.middlewares]
+    [http.middlewares.redirect.redirectScheme]
+      scheme = "https"
+      average = 100
+      burst = 50
+    [http.middlewares.httpsHeader.headers]
+      frameDeny = true
+      sslRedirect = true
+      referrerPolicy = "same-origin"
+      forceSTSHeader = true
+      
+      stsincludesubdomains = false
+      stspreload = true
+      stsseconds = 31536000
+      isdevelopment = false
+    [http.middlewares.app-compress.compress]
+
+
+[tls]
+  [[tls.certificates]]
+    certFile = "/data/fullchain.pem"
+    keyFile = "/data/privkey.pem"
