@@ -4,6 +4,6 @@
 - 2 di sarankan akses app server menggunakan protokol security minimal ssh key
 - 3 terpasang utilization monitoring apps seperti [grafana/prometheus/](https://github.com/adi-noegraha/dockprom)
 - 4 terpasang log error monitoring seperti [sentry](https://sentry.digitalservice.id/) / [aws-logs](https://docs.docker.com/config/containers/logging/awslogs/) 
-- 5 template docker-compose local/laptop , staging , production
+- 5 template docker-compose local/laptop , [staging](https://github.com/jabardigitalservice/pikobar-labkes/blob/development/docker-compose-development.yml) , [production](https://github.com/jabardigitalservice/pikobar-labkes/blob/development/docker-compose-production.yml)
 
 ## Will be updated on future (>,<)
